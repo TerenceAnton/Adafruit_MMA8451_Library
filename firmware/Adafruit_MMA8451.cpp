@@ -18,8 +18,7 @@
 /**************************************************************************/
 
 #include "Particle.h"
-
-#include <Adafruit_MMA8451.h>
+#include "Adafruit_MMA8451.h"
 
 static inline uint8_t i2cread(void) {
   return TwoWire.read();
