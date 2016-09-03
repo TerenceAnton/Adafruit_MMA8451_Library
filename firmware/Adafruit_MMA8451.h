@@ -20,13 +20,7 @@
 #ifndef _ADAFRUIT_MMA8451_H_
 #define _ADAFRUIT_MMA8451_H_
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "Particle.h"
-#endif
-
-#include <Wire.h>
+#include "Particle.h"
 
 #define USE_SENSOR    // Support the sesor library; comment out to compile/run without sensor library.
 #ifdef USE_SENSOR
