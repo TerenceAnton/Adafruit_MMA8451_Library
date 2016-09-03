@@ -22,8 +22,6 @@
 
 #include "Particle.h"
 
-TwoWire TwoWire;
-
 #define USE_SENSOR    // Support the sesor library; comment out to compile/run without sensor library.
 #ifdef USE_SENSOR
 #include "Adafruit_Sensor.h"

@@ -21,11 +21,11 @@
 #include "Adafruit_MMA8451.h"
 
 static inline uint8_t i2cread(void) {
-  return TwoWire.read();
+  return Wire.read();
 }
 
 static inline void i2cwrite(uint8_t x) {
-  TwoWire.write((uint8_t)x);
+  Wire.write((uint8_t)x);
 }
 
 
@@ -35,10 +35,10 @@ static inline void i2cwrite(uint8_t x) {
 */
 /**************************************************************************/
 void Adafruit_MMA8451::writeRegister8(uint8_t reg, uint8_t value) {
-  TwoWire.beginTransmission(_i2caddr);
+  Wire.beginTransmission(_i2caddr);
   i2cwrite((uint8_t)reg);
   i2cwrite((uint8_t)(value));
-  TwoWire.endTransmission();
+  Wire.endTransmission();
 }
 
 /**************************************************************************/
@@ -47,12 +47,12 @@ void Adafruit_MMA8451::writeRegister8(uint8_t reg, uint8_t value) {
 */
 /**************************************************************************/
 uint8_t Adafruit_MMA8451::readRegister8(uint8_t reg) {
-    TwoWire.beginTransmission(_i2caddr);
+    Wire.beginTransmission(_i2caddr);
     i2cwrite(reg);
-    TwoWire.endTransmission(false); // MMA8451 + friends uses repeated start!!
+    Wire.endTransmission(false); // MMA8451 + friends uses repeated start!!
 
-    TwoWire.requestFrom(_i2caddr, 1);
-    if (! TwoWire.available()) return -1;
+    Wire.requestFrom(_i2caddr, 1);
+    if (! Wire.available()) return -1;
     return (i2cread());
 }
 
@@ -71,7 +71,7 @@ Adafruit_MMA8451::Adafruit_MMA8451(int32_t sensorID) {
 */
 /**************************************************************************/
 bool Adafruit_MMA8451::begin(uint8_t i2caddr) {
-  TwoWire.begin();
+  Wire.begin();
   _i2caddr = i2caddr;
 
   /* Check connection */
@@ -115,14 +115,14 @@ bool Adafruit_MMA8451::begin(uint8_t i2caddr) {
 
 void Adafruit_MMA8451::read(void) {
   // read x y z at once
-  TwoWire.beginTransmission(_i2caddr);
+  Wire.beginTransmission(_i2caddr);
   i2cwrite(MMA8451_REG_OUT_X_MSB);
-  TwoWire.endTransmission(false); // MMA8451 + friends uses repeated start!!
+  Wire.endTransmission(false); // MMA8451 + friends uses repeated start!!
 
-  TwoWire.requestFrom(_i2caddr, 6);
-  x = TwoWire.read(); x <<= 8; x |= TwoWire.read(); x >>= 2;
-  y = TwoWire.read(); y <<= 8; y |= TwoWire.read(); y >>= 2;
-  z = TwoWire.read(); z <<= 8; z |= TwoWire.read(); z >>= 2;
+  Wire.requestFrom(_i2caddr, 6);
+  x = Wire.read(); x <<= 8; x |= Wire.read(); x >>= 2;
+  y = Wire.read(); y <<= 8; y |= Wire.read(); y >>= 2;
+  z = Wire.read(); z <<= 8; z |= Wire.read(); z >>= 2;
 
 
   uint8_t range = getRange();
