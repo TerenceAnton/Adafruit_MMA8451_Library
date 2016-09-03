@@ -1,0 +1,7 @@
+{
+	"name": "Adafruit_MMA8451_Library",
+	"author": "Terence Dela Fuente",
+	"version": "1.0.3",
+	"license": "BSD",
+	"description": "Adafruit_MMA8451_Library for Particle Devices"
+}
